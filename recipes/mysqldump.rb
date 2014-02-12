@@ -28,6 +28,7 @@ when 'ubuntu', 'debian'
 end
 
 template '/etc/holland/holland.conf' do
+  cookbook node['rackspace_holland']['templates_cookbook']['holland.conf']
   source 'holland.conf.erb'
   mode 0644
   owner 'root'
@@ -38,23 +39,22 @@ template '/etc/holland/holland.conf' do
 end
 
 template '/etc/holland/backupsets/default.conf' do
+  cookbook node['rackspace_holland']['templates_cookbook']['default.conf']
   source 'backupsets/default.conf.erb'
   mode 0644
   owner 'root'
   group 'root'
   variables(
-    plugin: 'mysqldump',
-    keep: '7',
-    hollpasswd: node['rackspace_holland']['server_holland_password']
+    plugin: 'mysqldump'
   )
 end
 
 template '/etc/holland/holland.sql' do
+  cookbook node['rackspace_holland']['templates_cookbook']['holland.sql']
   source 'holland.sql.erb'
   mode 0644
   owner 'root'
   group 'root'
-  variables hollpasswd: node['rackspace_holland']['server_holland_password']
 end
 
 execute 'holland-install-privileges' do
@@ -63,6 +63,7 @@ execute 'holland-install-privileges' do
 end
 
 template '/etc/cron.d/holland' do
+  cookbook node['rackspace_holland']['templates_cookbook']['holland.cron']
   source 'holland.cron.erb'
   mode 0644
   owner 'root'

@@ -29,3 +29,28 @@ when 'ubuntu'
     default['rackspace_holland']['install']['mysqldump'] = 'ubuntu1204-holland-mysqldump_1.0.10-1_all.deb'
   end
 end
+
+default['rackspace_holland']['templates_cookbook']['default.conf'] = 'rackspace_holland'
+default['rackspace_holland']['templates_cookbook']['holland.conf'] = 'rackspace_holland'
+default['rackspace_holland']['templates_cookbook']['holland.cron'] = 'rackspace_holland'
+default['rackspace_holland']['templates_cookbook']['holland.sql'] = 'rackspace_holland'
+
+# backupsets/default.conf.erb attributes
+# holland
+default['rackspace_holland']['config']['default.conf']['holland']['keep'] = '7'
+default['rackspace_holland']['config']['default.conf']['holland']['auto_purge_failures'] = 'yes'
+default['rackspace_holland']['config']['default.conf']['holland']['purge_policy'] = 'after-backup'
+default['rackspace_holland']['config']['default.conf']['holland']['estimated_size_factor'] = '1.0'
+
+# mysqldump
+default['rackspace_holland']['config']['default.conf']['mysqldump']['file_per_database'] = 'yes'
+
+# compression
+default['rackspace_holland']['config']['default.conf']['compression']['method'] = 'gzip'
+default['rackspace_holland']['config']['default.conf']['compression']['options'] = '--rsyncable'
+
+# holland.conf.erb attributes
+default['rackspace_holland']['config']['holland.conf']['logging']['log_file'] = '/var/log/holland/holland.log'
+
+## debug, info, warning, error, critical (case insensitive)
+default['rackspace_holland']['config']['holland.conf']['logging']['level'] = 'info'
