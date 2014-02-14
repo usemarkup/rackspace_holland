@@ -22,15 +22,11 @@ platforms:
   - recipe[rackspace_apt]
 
 suites:
-  - name: default
+  - name: rackspace_holland-mysqldump
     run_list:
-      - recipe[rackspace_newrelic::default]
-#  - name: java_agent
-#    run_list:
-#      - recipe[rackspace_newrelic::java-agent]
-#  - name: php-agent
-#    run_list:
-#      - recipe[rackspace_newrelic::php-agent]
-#  - name: python-agent
-#    run_list:
-#      - recipe[rackspace_newrelic::python-agent]
+      - recipe[rackspace_mysql::server]
+      - recipe[rackspace_holland::mysqldump]
+  - name: holland_test
+    run_list:
+      - recipe[rackspace_mysql::server]
+      - recipe[holland_test::mysqldump]

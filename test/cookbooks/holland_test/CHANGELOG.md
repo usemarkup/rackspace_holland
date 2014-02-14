@@ -1,11 +1,11 @@
-rackspace_holland CHANGELOG
-===========================
+holland_test CHANGELOG
+======================
 
-This file is used to list changes made in each version of the rackspace_holland cookbook.
+This file is used to list changes made in each version of the holland_test cookbook.
 
 0.1.0
 -----
-- [Ted Neykov] - Initial release of rackspace_holland
+- [your_name] - Initial release of holland_test
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
