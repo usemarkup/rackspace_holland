@@ -1,55 +1,63 @@
 rackspace_holland Cookbook
 ==========================
-TODO: Enter the cookbook description here.
+Installs and configures Holland.
+Currently only Holland's `mysqldump` plugin is supported.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+#### cookbooks
+`openssl`, `rackspace_mysql`, `rackspace_build_essential`
 
-e.g.
-#### packages
-- `toaster` - rackspace_holland needs toaster to brown your bagel.
+See [metadata.rb]('https://github.com/rackspace-cookbooks/rackspace_holland/blob/master/metadata.rb') for specific requirements.
 
 Attributes
 ----------
-TODO: List you cookbook attributes here.
+See the [attributes/default.rb](https://github.com/rackspace-cookbooks/rackspace_holland/blob/master/attributes/default.rb) for default values.
 
-e.g.
-#### rackspace_holland::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['rackspace_holland']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+Main attributes
+
+    node['rackspace_holland']['server_holland_password'] - Holland password.
+    node['rackspace_holland']['dir'] - Backup directory location.
+    node['rackspace_holland']['rhel_ver'] - RHEL/CentOS version-release e.g. `1.0.10-1.el6`
+    node['rackspace_holland']['install']['container'] - Holland image location.
+
+    node['rackspace_holland']['install']['main'] - Main package file name e.g. `debian72-holland_1.0.10-1_all.deb`
+    node['rackspace_holland']['install']['common'] = Common package file name.
+    node['rackspace_holland']['install']['mysqldump'] = mysqldump package file name.
+
+Cookbook template overrides:
+
+    node['rackspace_holland']['templates_cookbook']['node.conf'] = 'rackspace_holland'
+    node['rackspace_holland']['templates_cookbook']['holland.conf'] = 'rackspace_holland'
+    node['rackspace_holland']['templates_cookbook']['holland.cron'] = 'rackspace_holland'
+    node['rackspace_holland']['templates_cookbook']['holland.sql'] = 'rackspace_holland'
+    
+backupsets/node.conf.erb attributes
+
+    # holland
+    node['rackspace_holland']['config']['node.conf']['holland']['keep'] - Days to keep backup.
+    node['rackspace_holland']['config']['node.conf']['holland']['auto_purge_failures'] - Automatically clean up on failure.
+    node['rackspace_holland']['config']['node.conf']['holland']['purge_policy'] = 'after-backup'
+    node['rackspace_holland']['config']['node.conf']['holland']['estimated_size_factor'] = '1.0'
+    
+    # mysqldump
+    node['rackspace_holland']['config']['node.conf']['mysqldump']['file_per_database'] - One file per database.
+    
+    # compression
+    node['rackspace_holland']['config']['node.conf']['compression']['method'] - Defaults to 'gzip'
+    node['rackspace_holland']['config']['node.conf']['compression']['options'] - Compression options.
+    
+holland.conf.erb attributes
+
+    node['rackspace_holland']['config']['holland.conf']['logging']['log_file'] - Holland log file.
+    node['rackspace_holland']['config']['holland.conf']['logging']['level'] - debug, info, warning, error or critical
+
 
 Usage
 -----
 #### rackspace_holland::default
-TODO: Write usage instructions for each cookbook.
-
-e.g.
-Just include `rackspace_holland` in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[rackspace_holland]"
-  ]
-}
-```
+Just include `recipe[rackspace_holland::mysqldump]` in your node's `run_list`.
 
 License & Authors
 -----------------
