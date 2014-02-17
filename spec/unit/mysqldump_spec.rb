@@ -10,7 +10,7 @@ describe 'rackspace_holland::mysqldump' do
     stub_command("egrep 'mirror.rackspace.com/ubuntu/? precise-backports' /etc/apt/sources.list").and_return(true)
     stub_command("egrep 'mirror.rackspace.com/ubuntu/? precise-security' /etc/apt/sources.list").and_return(true)
     stub_command("egrep 'mirror.rackspace.com/ubuntu/? precise-updates' /etc/apt/sources.list").and_return(true)
-    stub_command("test -f /var/lib/apt/periodic/update-success-stamp").and_return(true)
+    stub_command('test -f /var/lib/apt/periodic/update-success-stamp').and_return(true)
   end
 
   context 'Ubuntu 12.04' do
