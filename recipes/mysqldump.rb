@@ -22,10 +22,10 @@ node.default['rackspace_mysql']['install_root_my_cnf'] = true
 include_recipe 'rackspace_mysql::client'
 include_recipe 'rackspace_holland::common'
 
-case node['platform']
-when 'redhat', 'centos'
+case node['platform_family']
+when 'rhel'
   package 'holland-mysqldump'
-when 'ubuntu', 'debian'
+when 'debian'
   remote_file "#{Chef::Config[:file_cache_path]}/#{node['rackspace_holland']['install']['mysqldump']}" do
     source "#{node['rackspace_holland']['install']['container']}/#{node['rackspace_holland']['install']['mysqldump']}"
     action :create_if_missing

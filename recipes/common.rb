@@ -19,11 +19,11 @@
 
 include_recipe 'rackspace_holland'
 
-case node['platform']
-when 'redhat', 'centos'
+case node['platform_family']
+when 'rhel'
   package 'MySQL-python'
   package 'holland-common'
-when 'ubuntu', 'debian'
+when 'debian'
   # package 'python-mysqldb'
   package 'python-mysqldb' do
     action :install

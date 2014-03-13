@@ -12,7 +12,6 @@ describe 'rackspace_holland::mysqldump' do
     stub_command("egrep 'mirror.rackspace.com/ubuntu/? precise-updates' /etc/apt/sources.list").and_return(true)
     stub_command('test -f /var/lib/apt/periodic/update-success-stamp').and_return(true)
   end
-
   context 'Ubuntu 12.04' do
     let(:chef_run) { ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04').converge(described_recipe) }
 
@@ -22,6 +21,14 @@ describe 'rackspace_holland::mysqldump' do
 
     it 'includes the client recipe' do
       expect(chef_run).to include_recipe('rackspace_mysql::client')
+    end
+
+    it 'installs libmysqlclient-dev package' do
+      expect(chef_run).to install_package('libmysqlclient-dev')
+    end
+
+    it 'installs mysql-client package' do
+      expect(chef_run).to install_package('mysql-client')
     end
 
     it 'includes the common recipe' do
@@ -37,15 +44,15 @@ describe 'rackspace_holland::mysqldump' do
     end
 
     it 'creates /etc/holland/holland.conf template from holland.conf.erb' do
-      expect(chef_run).to render_file('/etc/holland/holland.conf')
+      expect(chef_run).to create_template('/etc/holland/holland.conf')
     end
 
     it 'creates /etc/holland/backupsets/default.conf template from backupsets/default.conf.erb' do
-      expect(chef_run).to render_file('/etc/holland/backupsets/default.conf')
+      expect(chef_run).to create_template('/etc/holland/backupsets/default.conf')
     end
 
     it 'creates /etc/holland/holland.sql template from holland.sql.erb' do
-      expect(chef_run).to render_file('/etc/holland/holland.sql')
+      expect(chef_run).to create_template('/etc/holland/holland.sql')
     end
 
     it 'executes command' do
@@ -130,6 +137,14 @@ describe 'rackspace_holland::mysqldump' do
 
     it 'includes the client recipe' do
       expect(chef_run).to include_recipe('rackspace_mysql::client')
+    end
+
+    it 'installs mysql package' do
+      expect(chef_run).to install_package('mysql')
+    end
+
+    it 'installs mysql-devel package' do
+      expect(chef_run).to install_package('mysql-devel')
     end
 
     it 'includes the common recipe' do

@@ -17,13 +17,13 @@
 # limitations under the License.
 #
 
-case node['platform']
-when 'redhat', 'centos'
+case node['platform_family']
+when 'rhel'
   package 'python-setuptools'
   package 'holland' do
     version node['rackspace_holland']['rhel_ver']
   end
-when 'ubuntu', 'debian'
+when 'debian'
   package 'python-support' do
     action :install
   end
