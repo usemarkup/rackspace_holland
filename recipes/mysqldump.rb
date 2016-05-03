@@ -59,19 +59,6 @@ template '/etc/holland/backupsets/default.conf' do
   )
 end
 
-template '/etc/holland/holland.sql' do
-  cookbook node['rackspace_holland']['templates_cookbook']['holland.sql']
-  source 'holland.sql.erb'
-  mode 0644
-  owner 'root'
-  group 'root'
-end
-
-execute 'holland-install-privileges' do
-  command '/usr/bin/mysql -u root < /etc/holland/holland.sql'
-  action :run
-end
-
 template '/etc/cron.d/holland' do
   cookbook node['rackspace_holland']['templates_cookbook']['holland.cron']
   source 'holland.cron.erb'

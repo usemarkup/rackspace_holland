@@ -1,8 +1,8 @@
 rackspace_holland Cookbook
 ==========================
+
 Installs and configures Holland.
 Currently only Holland's `mysqldump` plugin is supported.
-
 
 Requirements
 ------------

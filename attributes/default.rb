@@ -59,3 +59,6 @@ default['rackspace_holland']['config']['holland.conf']['logging']['log_file'] = 
 
 ## debug, info, warning, error, critical (case insensitive)
 default['rackspace_holland']['config']['holland.conf']['logging']['level'] = 'info'
+
+## the time the crontab should run
+default['rackspace_holland']['config']['cron_time'] = '1 1 * * *'
