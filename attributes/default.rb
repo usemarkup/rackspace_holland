@@ -14,7 +14,7 @@ secure_password = '2081D6F9-4CC0-4186-A5A1-139F521B8ABB'
 set_unless['rackspace_holland']['server_holland_password'] = secure_password
 default['rackspace_holland']['dir'] = '/var/lib/mysqlbackup'
 
-default['rackspace_holland']['rhel_ver'] = '1.0.10-1.el6'
+default['rackspace_holland']['rhel_ver'] = '1.0.12-4.el6'
 
 default['rackspace_holland']['install']['container'] = 'https://4230a9a8f32809683bca-52dba99d4950464d3fae008a2694a6e5.ssl.cf5.rackcdn.com'
 
@@ -40,19 +40,23 @@ default['rackspace_holland']['templates_cookbook']['holland.conf'] = 'rackspace_
 default['rackspace_holland']['templates_cookbook']['holland.cron'] = 'rackspace_holland'
 default['rackspace_holland']['templates_cookbook']['holland.sql'] = 'rackspace_holland'
 
-# backupsets/default.conf.erb attributes
-# holland
-default['rackspace_holland']['config']['default.conf']['holland']['keep'] = '7'
-default['rackspace_holland']['config']['default.conf']['holland']['auto_purge_failures'] = 'yes'
-default['rackspace_holland']['config']['default.conf']['holland']['purge_policy'] = 'after-backup'
-default['rackspace_holland']['config']['default.conf']['holland']['estimated_size_factor'] = '1.0'
 
-# mysqldump
-default['rackspace_holland']['config']['default.conf']['mysqldump']['file_per_database'] = 'yes'
+# backupsets/default.conf.erb common attributes - reconfigure for your own set of backups
+# 
+# default['rackspace_holland']['backupsets']['name_of_backupset']['user'] = 'root'
+# default['rackspace_holland']['backupsets']['name_of_backupset']['password'] = ''
+# default['rackspace_holland']['backupsets']['name_of_backupset']['host'] = 'localhost'
+# default['rackspace_holland']['backupsets']['name_of_backupset']['port'] = '3360'
+# default['rackspace_holland']['backupsets']['name_of_backupset']['database'] = 'database_name'
 
-# compression
-default['rackspace_holland']['config']['default.conf']['compression']['method'] = 'gzip'
-default['rackspace_holland']['config']['default.conf']['compression']['options'] = '--rsyncable'
+# backupsets/default.conf.erb common attributes
+default['rackspace_holland']['config']['holland']['keep'] = '7'
+default['rackspace_holland']['config']['holland']['auto_purge_failures'] = 'yes'
+default['rackspace_holland']['config']['holland']['purge_policy'] = 'after-backup'
+default['rackspace_holland']['config']['holland']['estimated_size_factor'] = '1.0'
+default['rackspace_holland']['config']['mysqldump']['file_per_database'] = 'yes'
+default['rackspace_holland']['config']['compression']['method'] = 'gzip'
+default['rackspace_holland']['config']['compression']['options'] = '--rsyncable'
 
 # holland.conf.erb attributes
 default['rackspace_holland']['config']['holland.conf']['logging']['log_file'] = '/var/log/holland/holland.log'

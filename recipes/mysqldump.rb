@@ -37,26 +37,30 @@ when 'ubuntu', 'debian'
   end
 end
 
+# tell holland to backup every configured 'backupset'
 template '/etc/holland/holland.conf' do
   cookbook node['rackspace_holland']['templates_cookbook']['holland.conf']
   source 'holland.conf.erb'
   mode 0644
   owner 'root'
   group 'root'
-  variables(
-    backupsets: 'default'
-  )
+  variables({
+    backupsets: node['rackspace_holland']['backupsets'].keys.join(',')
+  })
 end
 
-template '/etc/holland/backupsets/default.conf' do
-  cookbook node['rackspace_holland']['templates_cookbook']['default.conf']
-  source 'backupsets/default.conf.erb'
-  mode 0644
-  owner 'root'
-  group 'root'
-  variables(
-    plugin: 'mysqldump'
-  )
+# make a backupset for each 'backupset'
+node['rackspace_holland']['backupsets'].each do |key, confighash|
+  template "/etc/holland/backupsets/#{key}.conf" do
+    cookbook node['rackspace_holland']['templates_cookbook']['default.conf']
+    source 'backupsets/default.conf.erb'
+    mode 0644
+    owner 'root'
+    group 'root'
+    variables({
+      :config => confighash
+    })
+  end
 end
 
 template '/etc/cron.d/holland' do

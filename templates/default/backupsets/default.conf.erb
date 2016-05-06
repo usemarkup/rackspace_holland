@@ -11,19 +11,19 @@
 ## default, in /etc/holland/backupsets/examples.
 
 [holland:backup]
-plugin = <%= @plugin %>
-backups-to-keep = <%= node['rackspace_holland']['config']['default.conf']['holland']['keep'] %>
-auto-purge-failures = <%= node['rackspace_holland']['config']['default.conf']['holland']['auto_purge_failures'] %>
-purge-policy = <%= node['rackspace_holland']['config']['default.conf']['holland']['purge_policy'] %>
-estimated-size-factor = <%= node['rackspace_holland']['config']['default.conf']['holland']['estimated_size_factor'] %>
+plugin = mysqldump
+backups-to-keep = <%= node['rackspace_holland']['config']['holland']['keep'] %>
+auto-purge-failures = <%= node['rackspace_holland']['config']['holland']['auto_purge_failures'] %>
+purge-policy = <%= node['rackspace_holland']['config']['holland']['purge_policy'] %>
+estimated-size-factor = <%= node['rackspace_holland']['config']['holland']['estimated_size_factor'] %>
 
 # This section defines the configuration options specific to the backup
 # plugin. In other words, the name of this section should match the name
 # of the plugin defined above.
 [mysqldump]
-file-per-database   = <%= node['rackspace_holland']['config']['default.conf']['mysqldump']['file_per_database'] %>
+file-per-database   = <%= node['rackspace_holland']['config']['mysqldump']['file_per_database'] %>
 #lock-method        = auto-detect
-#databases          = "*"
+databases          = "<%= @config.database %>"
 #tables             = "*"
 #stop-slave         = no
 #bin-log-position   = no
@@ -32,15 +32,14 @@ file-per-database   = <%= node['rackspace_holland']['config']['default.conf']['m
 # mysqldump provider has been modified, is to use inline fast gzip
 # compression (which is identical to the commented section below).
 [compression]
-method = <%= node['rackspace_holland']['config']['default.conf']['compression']['method'] %>
-options = <%= node['rackspace_holland']['config']['default.conf']['compression']['options'] %>
+method = <%= node['rackspace_holland']['config']['compression']['method'] %>
+options = <%= node['rackspace_holland']['config']['compression']['options'] %>
 
 [mysql:client]
 #defaults-extra-file       = /root/.my.cnf
 
 # define holland user information
-
-user = holland
-password = <%= node['rackspace_holland']['server_holland_password'] %>
-host = localhost
-port = 3360
+user = <%= @config.user %>
+password = <%= @config.password %>
+host = <%= @config.host %>
+port = <%= @config.port %>
