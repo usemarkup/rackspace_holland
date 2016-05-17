@@ -22,8 +22,11 @@ estimated-size-factor = <%= node['rackspace_holland']['config']['holland']['esti
 # of the plugin defined above.
 [mysqldump]
 file-per-database   = <%= node['rackspace_holland']['config']['mysqldump']['file_per_database'] %>
-#lock-method        = auto-detect
+lock-method        = <%= node['rackspace_holland']['config']['mysqldump']['lock_method'] %>
 databases          = "<%= @config.database %>"
+<% unless node[:rackspace_holland][:config][:mysqldump][:additional_options].nil? %>
+additional-options = "<%= node['rackspace_holland']['config']['mysqldump']['additional_options'] %>"
+<% end %>
 #tables             = "*"
 #stop-slave         = no
 #bin-log-position   = no
