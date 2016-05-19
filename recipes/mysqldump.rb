@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+require 'pathname'
 
 node.default['rackspace_mysql']['install_root_my_cnf'] = true
 
@@ -60,6 +61,22 @@ node['rackspace_holland']['backupsets'].each do |key, confighash|
     variables({
       :config => confighash
     })
+  end
+end
+
+# ensure each backupset folder has the correct permissions
+directory node['rackspace_holland']['dir'] do
+  owner 'application'
+  group 'application'
+  recursive true
+end
+node['rackspace_holland']['backupsets'].each do |key, confighash|
+  path = Pathname("#{node[:rackspace_holland][:dir]}/#{key}")
+  directory path.to_s do
+    owner 'application'
+    group confighash.has_key?('group')? confighash[:group] : 'application'
+    recursive
+    action :create
   end
 end
 
