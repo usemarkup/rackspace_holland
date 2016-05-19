@@ -12,6 +12,16 @@
 
 [holland:backup]
 plugin = mysqldump
+<% unless node[:rackspace_holland][:config][:before_command].nil? %>
+before-backup-command = <%= node['rackspace_holland']['config']['before_command'] %>
+<% end %>
+<% unless node[:rackspace_holland][:config][:after_command].nil? %>
+after-backup-command = <%= node['rackspace_holland']['config']['after_command'] %>
+<% end %>
+<% unless node[:rackspace_holland][:config][:failed_command].nil? %>
+failed-backup-command = <%= node['rackspace_holland']['config']['failed_command'] %>
+<% end %>
+
 backups-to-keep = <%= node['rackspace_holland']['config']['holland']['keep'] %>
 auto-purge-failures = <%= node['rackspace_holland']['config']['holland']['auto_purge_failures'] %>
 purge-policy = <%= node['rackspace_holland']['config']['holland']['purge_policy'] %>
