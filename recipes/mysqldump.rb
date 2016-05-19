@@ -68,6 +68,7 @@ end
 directory node['rackspace_holland']['dir'] do
   owner 'application'
   group 'application'
+  mode '0771'
   recursive true
 end
 node['rackspace_holland']['backupsets'].each do |key, confighash|
