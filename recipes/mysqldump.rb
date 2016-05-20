@@ -64,6 +64,15 @@ node['rackspace_holland']['backupsets'].each do |key, confighash|
   end
 end
 
+# ensure each backupset folder has the correct permissions
+node['rackspace_holland']['backupsets'].each do |key, confighash|
+  path = Pathname("#{node[:rackspace_holland][:dir]}/#{key}")
+  directory path.to_s do
+    recursive
+    action :create
+  end
+end
+
 template '/etc/cron.d/holland' do
   cookbook node['rackspace_holland']['templates_cookbook']['holland.cron']
   source 'holland.cron.erb'
