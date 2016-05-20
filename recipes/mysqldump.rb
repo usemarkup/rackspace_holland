@@ -68,7 +68,8 @@ end
 node['rackspace_holland']['backupsets'].each do |key, confighash|
   path = Pathname("#{node[:rackspace_holland][:dir]}/#{key}")
   directory path.to_s do
-    recursive
+    recursive true
+    mode "0600"
     action :create
   end
 end
