@@ -35,7 +35,7 @@ file-per-database   = <%= node['rackspace_holland']['config']['mysqldump']['file
 lock-method        = <%= node['rackspace_holland']['config']['mysqldump']['lock_method'] %>
 databases          = "<%= @config.database %>"
 <% unless node[:rackspace_holland][:config][:mysqldump][:additional_options].nil? %>
-additional-options = "<%= node['rackspace_holland']['config']['mysqldump']['additional_options'] %>"
+additional-options = <%= node['rackspace_holland']['config']['mysqldump']['additional_options'] %>
 <% end %>
 #tables             = "*"
 #stop-slave         = no
