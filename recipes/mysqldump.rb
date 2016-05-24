@@ -73,11 +73,3 @@ node['rackspace_holland']['backupsets'].each do |key, confighash|
     action :create
   end
 end
-
-template '/etc/cron.d/holland' do
-  cookbook node['rackspace_holland']['templates_cookbook']['holland.cron']
-  source 'holland.cron.erb'
-  mode 0644
-  owner 'root'
-  group 'root'
-end

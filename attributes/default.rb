@@ -63,5 +63,3 @@ default['rackspace_holland']['config']['compression']['options'] = '--rsyncable'
 default['rackspace_holland']['config']['holland.conf']['logging']['log_file'] = '/var/log/holland/holland.log'
 ## debug, info, warning, error, critical (case insensitive)
 default['rackspace_holland']['config']['holland.conf']['logging']['level'] = 'info'
-## the time the crontab should run
-default['rackspace_holland']['config']['cron_time'] = '1 1 * * *'
