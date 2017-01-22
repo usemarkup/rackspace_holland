@@ -33,13 +33,13 @@ estimated-size-factor = <%= node['rackspace_holland']['config']['holland']['esti
 [mysqldump]
 file-per-database   = <%= node['rackspace_holland']['config']['mysqldump']['file_per_database'] %>
 lock-method        = <%= node['rackspace_holland']['config']['mysqldump']['lock_method'] %>
+bin-log-position   = <%= node['rackspace_holland']['config']['mysqldump']['bin_log_position'] %>
 databases          = "<%= @config.database %>"
 <% unless node[:rackspace_holland][:config][:mysqldump][:additional_options].nil? %>
 additional-options = <%= node['rackspace_holland']['config']['mysqldump']['additional_options'] %>
 <% end %>
 #tables             = "*"
 #stop-slave         = no
-#bin-log-position   = no
 
 # The following section is for compression. The default, unless the
 # mysqldump provider has been modified, is to use inline fast gzip

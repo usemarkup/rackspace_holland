@@ -56,6 +56,7 @@ default['rackspace_holland']['config']['holland']['purge_policy'] = 'after-backu
 default['rackspace_holland']['config']['holland']['estimated_size_factor'] = '1.0'
 default['rackspace_holland']['config']['mysqldump']['file_per_database'] = 'yes'
 default['rackspace_holland']['config']['mysqldump']['lock_method'] = 'auto-detect'
+default['rackspace_holland']['config']['mysqldump']['bin_log_position'] = 'no'
 default['rackspace_holland']['config']['compression']['method'] = 'gzip'
 default['rackspace_holland']['config']['compression']['options'] = '--rsyncable'
 
