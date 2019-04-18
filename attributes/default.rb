@@ -14,8 +14,6 @@ secure_password = '2081D6F9-4CC0-4186-A5A1-139F521B8ABB'
 set_unless['rackspace_holland']['server_holland_password'] = secure_password
 default['rackspace_holland']['dir'] = '/var/lib/mysqlbackup'
 
-default['rackspace_holland']['rhel_ver'] = '1.0.12-4.el6'
-
 default['rackspace_holland']['install']['container'] = 'https://4230a9a8f32809683bca-52dba99d4950464d3fae008a2694a6e5.ssl.cf5.rackcdn.com'
 
 case node['platform']
