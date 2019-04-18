@@ -20,9 +20,7 @@
 case node['platform']
 when 'redhat', 'centos'
   package 'python-setuptools'
-  package 'holland' do
-    version node['rackspace_holland']['rhel_ver']
-  end
+  package 'holland'
 when 'ubuntu', 'debian'
   package 'python-support' do
     action :install
